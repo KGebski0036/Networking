@@ -37,7 +37,7 @@ func _on_Create_Server_pressed():
 func _on_Join_Server_pressed():
 	if server_ip.text != "":
 		multiplayer_config_ui.hide()
-		Network.ip = server_ip.text
+		Network.ipAdress = server_ip.text
 		Network.join_server() 
 		
 func instance_player(id) -> void:

@@ -1,7 +1,7 @@
 extends Node
 
 
-const DefaultPort = 28960
+const DefaultPort = 2233
 const MaxPlayers = 6
 
 var server = null
@@ -12,7 +12,7 @@ var ipAdress = ""
 func _ready():
 	
 	for ip in IP.get_local_addresses():
-		if ip.begins_with("192.168.") and not ip.ends_with(".1"):
+		if ip.begins_with("10.147.") and not ip.ends_with(".1"):
 			ipAdress = ip
 	
 	get_tree().connect("connected_to_server", self, "_connected_to_server")

@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 		
 		look_at(get_global_mouse_position())
 	else:
-		rotation_degrees = lerp(rotation_degrees, puppet_position, delta * 8)
+		rotation_degrees = lerp(rotation_degrees, puppet_rotation, delta * 8)
 		
 		if not tween.is_active():
 			move_and_slide(puppet_velocity * speed)
