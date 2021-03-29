@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const speed = 300
+var speed = 300
 
 var velocity = Vector2.ZERO
 
@@ -13,6 +13,11 @@ func _process(delta: float) -> void:
 	if is_network_master():
 		var x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
 		var y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
+		 
+		speed = 300
+		if Input.is_action_pressed("sprint"):
+			speed *= 2
+		
 		
 		velocity = Vector2(x,y).normalized()
 		
