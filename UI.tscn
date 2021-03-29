@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://basefont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI.gd" type="Script" id=2]
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Multi_Conf" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_bottom = 2.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Create Server" type="Button" parent="Multi_Conf"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -336.0
+margin_top = -141.0
+margin_right = 342.0
+margin_bottom = -27.0
+custom_fonts/font = ExtResource( 1 )
+text = "Create Server"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Join Server" type="Button" parent="Multi_Conf"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -301.0
+margin_top = 29.0
+margin_right = 302.0
+margin_bottom = 141.0
+custom_fonts/font = ExtResource( 1 )
+text = "Join Server"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Server_ip_address" type="LineEdit" parent="Multi_Conf"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -315.0
+margin_top = 38.0
+margin_right = 311.0
+margin_bottom = 118.0
+custom_fonts/font = ExtResource( 1 )
+align = 1
+placeholder_text = "enter ip"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Devce_ip" type="Label" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -64.0
+custom_fonts/font = ExtResource( 1 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Multi_Conf/Create Server" to="." method="_on_Create_Server_pressed"]
+[connection signal="pressed" from="Multi_Conf/Join Server" to="." method="_on_Join_Server_pressed"]
