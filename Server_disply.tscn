@@ -24,4 +24,7 @@ margin_right = 1708.22
 margin_bottom = 141.755
 custom_fonts/font = ExtResource( 1 )
 text = "Join"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Join_button" to="." method="_on_Join_button_pressed"]

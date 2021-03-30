@@ -7,7 +7,9 @@
 radius = 48.522
 height = 0.0
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -26,4 +28,24 @@ shape = SubResource( 1 )
 [node name="Network_tick_rate" type="Timer" parent="."]
 wait_time = 0.001
 autostart = true
+
+[node name="Reload_timer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="Shoot_point" type="Position2D" parent="."]
+position = Vector2( 63, 20 )
+
+[node name="Hit_timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -0.561234, -1.12247 )
+shape = SubResource( 1 )
 [connection signal="timeout" from="Network_tick_rate" to="." method="_on_Network_tick_rate_timeout"]
+[connection signal="timeout" from="Reload_timer" to="." method="_on_Reload_timer_timeout"]
+[connection signal="timeout" from="Hit_timer" to="." method="_on_Hit_timer_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
