@@ -49,6 +49,10 @@ func _process(delta: float) -> void:
 		if not tween.is_active():
 			move_and_slide(puppet_velocity * speed)
 			
+	if hp <= 0:
+		if get_tree().is_network_server():
+			rpc("destroy")
+			
 func lerp_angle(from, to, weight):
 	return from + short_angle_dist(from, to) * weight
 
@@ -105,11 +109,14 @@ func _on_Hitbox_area_entered(area):
 	if get_tree().is_network_server():
 		if area.is_in_group("player_damager") and area.get_parent().player_owner != int(name):
 			rpc("hit_by_damager", area.get_parent().damage)
-			area.get_parent.rpc("destroy")
+			area.get_parent().rpc("destroy")
 			
 sync func hit_by_damger(damage):
 	hp -= damage
 	modulate = Color(5,5,5,1)
 	hit_timer.start()
 	
-	
+sync func destroy():
+	visible = false
+	$CollisionShape2D.disabled = true
+	$Hitbox/CollisionShape2.disabled = true
