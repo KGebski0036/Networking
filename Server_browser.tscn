@@ -1,0 +1,108 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://basefont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Server_lisiner.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Server_browser.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Searching_animation"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "Searching for Server", "Searching for Server.", "Searching for Server..", "Searching for Server..." ]
+}
+
+[node name="Server_browser" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -6.0
+margin_right = -6.0
+
+[node name="Manual_setup" type="Button" parent="Background"]
+margin_left = 1192.0
+margin_top = 898.0
+margin_right = 1764.0
+margin_bottom = 968.0
+custom_fonts/font = ExtResource( 1 )
+text = "Manual setup"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="Background"]
+margin_left = 106.0
+margin_top = 894.0
+margin_right = 434.0
+margin_bottom = 984.0
+custom_fonts/font = ExtResource( 1 )
+text = "<—"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Server_ip" type="LineEdit" parent="Background"]
+margin_left = 398.0
+margin_top = 110.0
+margin_right = 1364.0
+margin_bottom = 214.0
+custom_fonts/font = ExtResource( 1 )
+text = "Enter IP"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Join_server" type="Button" parent="Background/Server_ip"]
+margin_left = 236.0
+margin_top = 178.0
+margin_right = 753.0
+margin_bottom = 298.0
+custom_fonts/font = ExtResource( 1 )
+text = "Join Server"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background"]
+margin_left = 108.0
+margin_top = 104.0
+margin_right = 1766.0
+margin_bottom = 896.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Searching" type="Label" parent="Background/VBoxContainer"]
+margin_top = 364.0
+margin_right = 1658.0
+margin_bottom = 428.0
+custom_fonts/font = ExtResource( 1 )
+text = "Searching for Server..."
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background/VBoxContainer/Searching"]
+autoplay = "Searching_animation"
+playback_speed = 0.75
+anims/Searching_animation = SubResource( 1 )
+
+[node name="Server_lisiner" parent="." instance=ExtResource( 2 )]
+[connection signal="pressed" from="Background/Manual_setup" to="." method="_on_Manual_setup_pressed"]
+[connection signal="pressed" from="Background/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="Background/Server_ip/Join_server" to="." method="_on_Join_server_pressed"]
+[connection signal="new_server" from="Server_lisiner" to="." method="_on_Server_lisiner_new_server"]
+[connection signal="remove_server" from="Server_lisiner" to="." method="_on_Server_lisiner_remove_server"]

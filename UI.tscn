@@ -50,7 +50,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Server_ip_address" type="LineEdit" parent="Multi_Conf"]
+[node name="Username_text" type="LineEdit" parent="Multi_Conf"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -315.0
@@ -59,7 +59,10 @@ margin_right = 311.0
 margin_bottom = 118.0
 custom_fonts/font = ExtResource( 1 )
 align = 1
-placeholder_text = "enter ip"
+placeholder_text = "enter Username"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -3,8 +3,7 @@ extends Control
 var player = load("res://Player.tscn")
 
 onready var multiplayer_config_ui = $Multi_Conf
-onready var server_ip = $Multi_Conf/Server_ip_address
-
+onready var username_text = $Multi_Conf/Username_text
 onready var device_ip_address = $CanvasLayer/Devce_ip
 
 
@@ -29,16 +28,18 @@ func _connected_to_server():
 	instance_player(get_tree().get_network_unique_id())
 	
 func _on_Create_Server_pressed():
-	multiplayer_config_ui.hide()
-	Network.create_server()
+	if not (username_text.text == ""):
+		Network.player_username = username_text.text
+		multiplayer_config_ui.hide()
+		Network.create_server()
 	
-	instance_player(get_tree().get_network_unique_id())
+		instance_player(get_tree().get_network_unique_id())
 
 func _on_Join_Server_pressed():
-	if server_ip.text != "":
+	if username_text.text != "":
 		multiplayer_config_ui.hide()
-		Network.ipAdress = server_ip.text
-		Network.join_server() 
+		username_text.hide()
+		Global.instance_node(load("res://Server_browser.tscn"), self)
 		
 func instance_player(id) -> void:
 	var player_instance = Global.instance_node_at_location(player, Players, Vector2(rand_range(0,1920),rand_range(0,1080)))
