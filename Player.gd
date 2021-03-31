@@ -107,7 +107,8 @@ func _on_Hit_timer_timeout():
 
 func _on_Hitbox_area_entered(area):
 	if get_tree().is_network_server():
-		if area.is_in_group("player_damager") and area.get_parent().player_owner != int(name):
+		if area.is_in_group("player_damager") and area.get_parent().player_owner != get_tree().get_network_unique_id():
+			print(hp)
 			rpc("hit_by_damager", area.get_parent().damage)
 			area.get_parent().rpc("destroy")
 			
